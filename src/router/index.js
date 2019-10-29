@@ -6,9 +6,10 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/manages',
     name: 'manages',
     component: Manages,
+    redirect:'/manages/home',
     children:[{
       path:"home",
       component: () => import('../pages/manages/Home.vue')
@@ -17,10 +18,7 @@ const routes = [
       path:"order",
       component: () => import('../pages/manages/Order.vue')
     },
-    {
-      path:"address",
-      component: () => import('../pages/manages/Address.vue')
-    },
+    
     {
       path:"user",
       component: () => import('../pages/manages/User.vue')
@@ -28,9 +26,17 @@ const routes = [
   ]
   },
   {
-    path: '/login',
+    path: '/',
     name: 'login',
     component: () => import('../pages/Login.vue')
+  },
+  {
+    path:"/address",
+    component: () => import('../pages/Address.vue')
+  },
+  {
+    path:"/addaddress",
+    component: () => import('../pages/addAddress.vue')
   }
 ]
 
