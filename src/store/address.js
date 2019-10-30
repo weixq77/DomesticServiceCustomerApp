@@ -2,15 +2,25 @@ import { get,post } from '@/http/axios'
 export default {
   namespaced: true,
   state: {
-    address:[]
+    address:[],//当前用户所有地址
+    updateAddress:{},//存放当前需要修改的地址
   },
   getters:{
     
   },
   mutations: {
-   refreahAddress(state,address){
-     state.address=address;
-   }
+    // 刷新当前用户的的所有地址
+    refreahAddress(state,address){
+      state.address=address;
+    },
+    // 设置存储当前需要修改的地址信息
+    setUpdateAddress(state,addressObj){
+      if(addressObj){
+        state.updateAddress=addressObj;
+      }else{
+        state.updateAddress={};
+      }
+    }
   },
   actions: {
     // 查询用户所有地址信息
@@ -20,10 +30,8 @@ export default {
         return response;
       },
       // 添加用户的地址信息
-      async saveAddress(context,payload){
+      async saveAddress(payload){
         let response = await post("/address/saveOrUpdate",payload);
-        // 存储数据成功请求刷新用户地址
-        context.dispatch('findAddress');
         return response
       }
   }

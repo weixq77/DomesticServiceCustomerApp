@@ -17,8 +17,7 @@
     </div>
 </template>
 <script>
-import {mapState} from 'vuex'
-import  {mapActions} from 'vuex'
+import {mapState,mapMutations,mapActions} from 'vuex'
 export default {
     data(){
         return{
@@ -30,7 +29,9 @@ export default {
         this.loadDate();
      },
       computed:{
+        //   用户信息
         ...mapState("user",["info"]),
+        // 用户的地址信息
         ...mapState("address",["address"]),
         // 重新封装address以便渲染数据
         refreshAddressList:function(){
@@ -49,21 +50,30 @@ export default {
         }
     },
     methods:{
-          ...mapActions("address",["findAddress"]),
-          loadDate(){
-              this.findAddress(this.info.id);
-          },
-           onAdd(){
-             this.$router.push({path:"/saveAddress"});
-            },
-            onClickLeft(){
+        // 查询当前用户所有地址的请求
+        ...mapActions("address",["findAddress"]),
+        // 设置保存当前需要修改的地址对象
+        ...mapMutations("address",["setUpdateAddress"]),
+        // 加载数据
+        loadDate(){
+            this.findAddress(this.info.id);
+        },
+        // 跳转添加地址页面
+        onAdd(){
+            this.$router.push({path:"/saveAddress"});
+        },
+        // 返回用户页面
+        onClickLeft(){
             this.$router.push({path:"/manages/user"});
-                },
-            onEdit(){
-                this.$toast("编辑地址信息");
-            }
-            
-
+        },
+        // 修改用户地址
+        onEdit(item){
+            // item是组件api提供的当前地址对象
+            // 1.使用状态机存储一下当前需要修改的地址对象
+            this.setUpdateAddress(item);
+            // 2.跳转添加用户地址页面
+            this.$router.push({path:"/saveAddress"});
+        }     
     }
 }
 </script>
