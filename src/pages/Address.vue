@@ -5,9 +5,7 @@
             left-arrow
             @click-left="onClickLeft"
             />
-     <!-- {{address}}
-     {{info}} -->
-     <van-address-list
+        <van-address-list
             v-model="chosenAddressId"
             :list="refreshAddressList"
             @edit="onEdit"
@@ -56,6 +54,7 @@ export default {
         ...mapMutations("address",["setUpdateAddress"]),
         // 加载数据
         loadDate(){
+            // 获取当前用户的所有的地址
             this.findAddress(this.info.id);
         },
         // 跳转添加地址页面
@@ -64,7 +63,7 @@ export default {
         },
         // 返回用户页面
         onClickLeft(){
-            this.$router.push({path:"/manages/user"});
+            this.$router.push({path:"/manages/user",query:{id:2}});
         },
         // 修改用户地址
         onEdit(item){

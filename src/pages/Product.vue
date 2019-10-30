@@ -12,13 +12,13 @@
                   v-for ="c in categories"
                   :key="c.id"
                   :title="c.name" 
-                  @change="changeCategory"            
+                  @change="changeCategory(c.id)"            
                 />
             </van-sidebar>
         </div>
         <div id="message">
             <van-card
-                v-for=" item in products"
+                v-for=" item in productById"
                 :key="item.id"
                 :num="item.total"
                 :price="item.price"
@@ -41,35 +41,40 @@ export default {
     name:'product',
     data() {
       return {
-            activeName:'0',//记录当前选中标签页
             value: 0,
-            activeKey:2
+            activeKey:0//记录当前选中标签页
       }
     },
     created(){
-        this.findAllProducts();
+        // 查询所有产品
+        // this.findAllProducts();
         //获取所有的栏目信息放入侧边导航栏
-        this.findAllCategories();
+        // this.findAllCategories();
     },
     computed:{
-        ...mapState("product",["products"]),
+        // 根据栏目id查询到的商品信息
+        ...mapState("product",["productById"]),
+        // 所有栏目信息
         ...mapState("category",["categories"])
 
     },
     methods:{
         // 查询所有产品
         ...mapActions("category",["findAllCategories"]),
-        ...mapActions("product",["findAllProducts"]),
+        // 根据侧边栏id查询商品信息
+        ...mapActions("product",["findProductByCategory"]),
         //跳转订单页面
         onSubmit(){
             this.$router.push("/SubmitOrder")
         },
         // 返回主页
         onClickLeft(){
-             this.$router.push({path:'/manages/home'})
+             this.$router.push({path:'/'})
         },
-        changeCategory(){
-            this.$toast("aaa")
+        // 当侧边栏改变的时候，根据栏目id查询对应商品显示
+        changeCategory(categoryId){
+            // 根据栏目id查询商品
+            this.findProductByCategory(idcategoryId)
         }
     }
 }

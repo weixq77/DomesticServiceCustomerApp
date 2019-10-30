@@ -28,7 +28,7 @@ export default {
     //通过token获取info顾客信息
     async info(context,token){
       let response= await get("/user/info",{token});
-      context.commit("refreshInfo",response.data)
+      await context.commit("refreshInfo",response.data)
     },
     //退出登录，清除token
     async logout(context){

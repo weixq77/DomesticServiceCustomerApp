@@ -123,19 +123,37 @@ export default {
         }
     },
     created(){
-        this.loadData();
+        if(this.info.id){
+            // 如果用户id存在，则直接加载订单数据
+            this.loadData();
+        }else{
+            // 用户id不存在，则先拿token去获取用户id
+            if(this.token){
+                //如果有token请求查出查询出token所带的顾客信息info
+                this.getInfo(this.token)
+                // 获取用户id了再去加载订单
+                this.loadData();
+            }else{
+                //如果没有token跳转到登录页面
+                this.$toast("token失效，请先登录")
+                this.$router.push({path:"/login"})
+            }
+        }
     },
     computed:{
         // 顾客的全部订单
         ...mapState("order",["orders"]),
-        // 顾客信息
-        ...mapState("user",["info"]),
+        // 顾客信息,token
+        ...mapState("user",["info","token"]),
         // 指定状态的订单
         ...mapGetters("order",["orderStatusFilter"])
     },
     methods:{
         // 查询该顾客的所有订单的请求,确认订单完成
         ...mapActions("order",["loadCustomerOrderData","confirmOrder"]),
+        ...mapActions('user',{
+            'getInfo':'info'
+        }),
         // 普通方法
         // fun:加载数据
         loadData(){
@@ -153,7 +171,7 @@ export default {
                 this.$toast.fail(error);
             })
         },
-        // 提交订单付款
+        // 未付款的订单，提交订单付款
         paymentOrder(){
             alert("付款");
         }

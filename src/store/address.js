@@ -4,6 +4,7 @@ export default {
   state: {
     address:[],//当前用户所有地址
     updateAddress:{},//存放当前需要修改的地址
+    btnDelete:false,//判断添加地址中的删除按钮是否需要出现
   },
   getters:{
     
@@ -20,6 +21,14 @@ export default {
       }else{
         state.updateAddress={};
       }
+    },
+    // 设置删除地址按钮显示
+    btnDeleteShow(state){
+      state.btnDelete = true;
+    },
+    // 设置删除地址按钮隐藏
+    btnDeleteClose(state){
+      state.btnDelete = false;
     }
   },
   actions: {
@@ -32,6 +41,11 @@ export default {
       // 添加用户的地址信息
       async saveAddress(payload){
         let response = await post("/address/saveOrUpdate",payload);
+        return response
+      },
+      // 删除地址信息
+      async deleteAddress(id){
+        let response = await get("/address/deleteById",{id});
         return response
       }
   }

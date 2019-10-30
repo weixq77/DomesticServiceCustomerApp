@@ -46,22 +46,31 @@
 import {mapState,mapMatutions,mapGetters,mapActions} from 'vuex'
 export default {
     created(){
+        // 查询所有的栏目
         this.findAllCategories();
+        // 查询所有商品展示
         this.findAllProducts();
     },
     computed:{
-        ...mapState("user",["info"]),
+        // 所有栏目信息
         ...mapState("category",["categories"]),
+        // 所有商品信息
         ...mapState("product",["products"])
    },
     methods:{
+        // 查询所有的栏目
         ...mapActions("category",["findAllCategories"]),
+        // 查询所有的产品，根据栏目id查询产品
         ...mapActions("product",["findAllProducts","findProductByCategory"]),
+        // 打开商品展示页
        openCategory(id){
-           alert(id);
+        //    alert(id);
+        // 根据栏目id查询商品
           this.findProductByCategory(id)
+        //   跳转商品展示页面
           this.$router.push({path:'/product'})
        },
+    //    商品详情页
        openProduct(){
            this.$toast('跳转商品详情页');
        }

@@ -31,8 +31,25 @@ export default {
         return{
         }
     },
+    created(){
+        // 用户id不存在，则先拿token去获取用户id
+        if(this.token){
+            //如果有token请求查出查询出token所带的顾客信息info
+            this.getInfo(this.token)
+        }else{
+            //如果没有token跳转到登录页面
+            this.$toast("token失效，请先登录")
+            this.$router.push({path:"/login"})
+        }
+    },
+    computed:{
+        ...mapState("user",["info","token"])
+    },
     methods:{
-        ...mapActions('user',['logout']),
+        ...mapActions('user',{
+            'getInfo':'info',
+            'logout':'logout'
+        }),
         onClickRight(){
             //点击退出调用事件
             this.logout()
@@ -47,9 +64,7 @@ export default {
         }
         
     }, 
-    computed:{
-                ...mapState("user",["info"])
-            }
+    
 }
 </script>
 <style  scoped>

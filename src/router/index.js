@@ -6,39 +6,42 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path:'/',
+    redirect: '/manages/home',//重定向到首页
+  },
+  {
     path: '/manages',
     name: 'manages',
     component: Manages,
-    redirect:'/manages/home',
-    children:[{
-      path:"home",
-      component: () => import('../pages/manages/Home.vue')
-    },
-    {
-      path:"order",
-      component: () => import('../pages/manages/Order.vue')
-    }, 
-    {
-      path:"user",
-      component: () => import('../pages/manages/User.vue')
-    },
-  ]
+      children:[{
+        path:"home",//首页
+        component: () => import('../pages/manages/Home.vue')
+      },
+      {
+        path:"order",//订单页
+        component: () => import('../pages/manages/Order.vue')
+      }, 
+      {
+        path:"user",//用户页
+        component: () => import('../pages/manages/User.vue')
+      },
+    ]
   },
   {
-    path: '/',
+    path: '/login',//登录
     name: 'login',
     component: () => import('../pages/Login.vue')
   },
   {
-    path:"/address",
+    path:"/address",//地址显示页
     component: () => import('../pages/Address.vue')
   },
   {
-    path:"/saveaddress",
+    path:"/saveaddress",//保存地址页
     component: () => import('../pages/saveAddress.vue')
   },
   {
-    path:"/product",
+    path:"/product",//产品展示页
     component: () => import('../pages/Product.vue')
   },
 ]
