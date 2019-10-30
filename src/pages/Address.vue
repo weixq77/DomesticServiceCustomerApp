@@ -5,8 +5,8 @@
             left-arrow
             @click-left="onClickLeft"
             />
-     {{address}}
-     {{info}}
+     <!-- {{address}}
+     {{info}} -->
      <van-address-list
             v-model="chosenAddressId"
             :list="refreshAddressList"

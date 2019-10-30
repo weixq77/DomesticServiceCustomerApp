@@ -17,9 +17,6 @@ export default {
         }
     },
     methods:{
-        tabChangeHandler(path){
-            this.$router.push(path)
-        }
     }
 }
 </script>

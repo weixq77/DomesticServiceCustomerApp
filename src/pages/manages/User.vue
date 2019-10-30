@@ -3,7 +3,7 @@
         <van-nav-bar
             title="个人页面"
             />
-            {{info}}
+            <!-- {{info}} -->
            <div id="header">     
                <ul>
                    <li>

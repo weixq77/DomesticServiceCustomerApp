@@ -9,7 +9,7 @@
                  </div>
             </div>
             <div id="content"  @keyup.enter="loginHandler">
-                {{form}}
+                <!-- {{form}} -->
                     <van-cell-group>
                         <van-field
                             v-model="form.username"
@@ -40,9 +40,9 @@ export default {
     data(){
         return{
             form:{
-                type:"customer",
-                username:"customer1",
-                password:"123321"
+                type:"customer"
+                // username:"customer1",
+                // password:"123321"
                 
             }
         }        
@@ -64,7 +64,7 @@ export default {
 </script>
 <style scoped>
 .header{
-    background-color: skyblue;
+    background-color: rgb(0, 183, 255);
     height: 200px;
     position: relative;
 }
