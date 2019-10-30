@@ -20,7 +20,7 @@
                     :key="c.id"
                     :icon="c.icon"
                     :text="c.name"
-                    @click="openCategory"
+                    @click="openCategory(c.id)"
                 />
                 <van-grid-item>
                     <img src="./images/栏目.png" />
@@ -56,9 +56,11 @@ export default {
    },
     methods:{
         ...mapActions("category",["findAllCategories"]),
-        ...mapActions("product",["findAllProducts"]),
-       openCategory(){
-           this.$toast('跳转产品列表');
+        ...mapActions("product",["findAllProducts","findProductByCategory"]),
+       openCategory(id){
+           alert(id);
+          this.findProductByCategory(id)
+          this.$router.push({path:'/product'})
        },
        openProduct(){
            this.$toast('跳转商品详情页');

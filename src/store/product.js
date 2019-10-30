@@ -34,5 +34,13 @@ export default{
             // 使用commit去触发突变，先指定突变名称，再传递一个参数
             context.commit('refreshProduct', response.data)
           },
+          //设定一个异步函数来通过id查找产品的信息
+          async findProductByCategory(context,id){
+              let resulet=await get('/product/findByCategoryId',{id})
+              console.log("查询结果：",resulet)
+              //触发突变，将查询到的结果返回product中
+              await context.commit('refreshProduct',resulet.data)
+              return resulet;
+          }
     }
 }

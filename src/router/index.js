@@ -17,8 +17,7 @@ const routes = [
     {
       path:"order",
       component: () => import('../pages/manages/Order.vue')
-    },
-    
+    }, 
     {
       path:"user",
       component: () => import('../pages/manages/User.vue')
@@ -37,7 +36,11 @@ const routes = [
   {
     path:"/saveaddress",
     component: () => import('../pages/saveAddress.vue')
-  }
+  },
+  {
+    path:"/product",
+    component: () => import('../pages/Product.vue')
+  },
 ]
 
 const router = new VueRouter({
