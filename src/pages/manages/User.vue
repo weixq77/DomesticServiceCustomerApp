@@ -25,15 +25,22 @@
     </div>
 </template>
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 export default {
     data(){
         return{
         }
     },
     methods:{
+        ...mapActions('user',['logout']),
         onClickRight(){
-             this.$router.push({path:"/"})
+            //点击退出调用事件
+            this.logout()
+            //如果成功则返回登录页面
+            .then(()=>{
+                 this.$router.push({path:"/"})
+            })
+            
         },
         addressHandler(){
               this.$router.push({path:"/address"})

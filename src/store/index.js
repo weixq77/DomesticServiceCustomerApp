@@ -12,7 +12,6 @@ export default new Vuex.Store({
     user,
     address,
     product,
-    category
-
+    category,
   }
 })

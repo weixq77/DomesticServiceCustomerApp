@@ -1,4 +1,4 @@
-import { get, post_json} from '@/http/axios'
+import { get, post_json,post} from '@/http/axios'
 import {setToken,getToken,removeToken} from '../utils/auth.js'
 export default {
   namespaced: true,
@@ -25,9 +25,20 @@ export default {
       //2.将token维护起来
       context.commit("refreshToken",token)
     },
+    //通过token获取info顾客信息
     async info(context,token){
       let response= await get("/user/info",{token});
       context.commit("refreshInfo",response.data)
+    },
+    //退出登录，清除token
+    async logout(context){
+      //1.向后台请求退出
+      await post("/user/logout");
+      //2.清除本地token
+      removeToken();
+      //将token和info情空
+        context.commit("refreshToken","")
+       context.commit("refreshInfo",{})
     }
     
   }

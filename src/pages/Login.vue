@@ -41,8 +41,6 @@ export default {
         return{
             form:{
                 type:"customer"
-                // username:"customer1",
-                // password:"123321"
                 
             }
         }        

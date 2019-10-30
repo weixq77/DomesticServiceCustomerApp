@@ -35,8 +35,8 @@ const routes = [
     component: () => import('../pages/Address.vue')
   },
   {
-    path:"/addaddress",
-    component: () => import('../pages/addAddress.vue')
+    path:"/saveaddress",
+    component: () => import('../pages/saveAddress.vue')
   }
 ]
 

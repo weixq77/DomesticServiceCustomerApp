@@ -58,7 +58,7 @@ export default {
               this.findAddress(this.info.id);
           },
            onAdd(){
-             this.$router.push({path:"/addAddress"});
+             this.$router.push({path:"/saveAddress"});
             },
             onClickLeft(){
             this.$router.push({path:"/manages/user"});
