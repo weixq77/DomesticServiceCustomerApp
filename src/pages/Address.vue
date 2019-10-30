@@ -34,14 +34,10 @@ export default {
         ...mapState("address",["address"]),
         // 重新封装address以便渲染数据
         refreshAddressList:function(){
-            // alert(1);
-            // list[{id,name,tel,address}]
             let list = [];
-            let obj = {};
-            obj.name = this.info.name;//用户姓名
-            console.log("address--->",this.address);
             for(let item of this.address){
-                console.log("item",item)
+                let obj = {};
+                obj.name = this.info.name;//用户姓名
                 obj.id = item.id;//地址id
                 obj.tel = item.telephone;//收货电话
                 // 拼接收货地址
