@@ -43,6 +43,10 @@ const routes = [
   {
     path:"/product",//产品展示页
     component: () => import('../pages/Product.vue')
+  }, 
+  {
+    path:"/submitOrder",//产品展示页
+    component: () => import('../pages/SubmitOrder.vue')
   },
 ]
 
