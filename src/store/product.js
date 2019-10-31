@@ -45,6 +45,9 @@ export default{
           async findProductByCategory({commit},id){
             const response = await get('/product/findByCategoryId',{id})
               //触发突变，将查询到的结果返回product中
+
+              //---给每一个产品数据绑定一个name属性
+
               commit('refreshByIdProduct',response.data)
               return response;
           }
