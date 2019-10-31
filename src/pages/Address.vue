@@ -11,7 +11,6 @@
             @edit="onEdit"
             @add="onAdd"
             />
-            
     </div>
 </template>
 <script>

@@ -39,12 +39,12 @@ export default {
         return response;
       },
       // 添加用户的地址信息
-      async saveAddress(payload){
+      async saveAddress(context,payload){
         let response = await post("/address/saveOrUpdate",payload);
         return response
       },
       // 删除地址信息
-      async deleteAddress(id){
+      async deleteAddress(context,id){
         let response = await get("/address/deleteById",{id});
         return response
       }

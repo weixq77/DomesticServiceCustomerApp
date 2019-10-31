@@ -16,15 +16,15 @@
         <div class="categoryList">      
             <van-grid :column-num="3" >
                 <van-grid-item
-                    v-for="c in categories.slice(0,5)"
+                    v-for="c in categories.slice(0,6)"
                     :key="c.id"
                     :icon="c.icon"
                     :text="c.name"
                     @click="openCategory(c.id)"
                 />
-                <van-grid-item>
+                <!-- <van-grid-item>
                     <img src="./images/栏目.png" />
-                </van-grid-item>
+                </van-grid-item> -->
             </van-grid>
        </div>
        <div class="productList">
