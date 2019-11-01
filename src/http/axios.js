@@ -68,6 +68,20 @@ export function post_json(url, data) {
   })
 }
 
+// 提交post请求提交订单项使用
+export function post_arr_order(url, data) {
+  return axios({
+    method: 'post',
+    url,
+    data: qs.stringify(data, { allowDots: true }), // 用qs转换为指定格式的字符串,并允许对象中嵌套数组的格式
+    timeout: 10000,
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
+}
+
 // get请求获取数据
 export function get(url, params) {
   return axios({

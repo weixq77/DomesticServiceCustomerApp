@@ -30,7 +30,10 @@ export default {
     },
     //   清空当前保存的所有记录
     clearRecord(state){
-      
+      state.categoryId = 0;
+      state.categoryIndex = 0
+      state.addressReturn = 0;
+      state.currentOrderAddress = {}
     }
   },
   actions: {

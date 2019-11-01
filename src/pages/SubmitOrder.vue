@@ -115,6 +115,7 @@ export default {
         ...mapGetters("shopcar",["totalMoney"]),
         //获取到用户的所有的地址信息
         // ...mapState("address",["address"]),
+        // 用户当前选中的地址
         ...mapState("lastpage",["currentOrderAddress"]),
         //重新封装地址信息，以便于赋值给label 要string类型
         addressList:function(){
@@ -131,8 +132,10 @@ export default {
     methods:{
         //调用突变获取到该用户的所有地址信息
         // ...mapActions("address",["findAddress"]),
-         // 在状态机中存储一个地址选中跳转的index
-        ...mapMutations("lastpage",["setAddressReturn"]),
+         // 在状态机中存储一个地址选中跳转的index    清空记录
+        ...mapMutations("lastpage",["setAddressReturn","clearRecord"]),
+        // 提交订单
+        ...mapActions("order",["submitOrder"]),
         // 返回上一页
         onClickLeft() {
             // 传递一个栏目的索引及id，返回时激活
@@ -147,8 +150,21 @@ export default {
         },
         // 订单提交成功
         onSubmit(){
-            this.$toast("提交成功");
-            this.$router.push("/manages/order")
+            // 先判断是否选中了地址，没有的话就必须要选中
+            if(JSON.stringify(this.currentOrderAddress)=='{}'){
+                 this.$toast.fail("请选择地址！");
+            }else{
+                // 否则提交订单
+                this.submitOrder()
+                .then((response)=>{
+                    // 提交成功跳转订单页
+                    this.$toast(response.statusText);
+                    this.$router.push({path:"/manages/order",query:{id:1}});
+                    // 并将记录的索引或id清空
+                    this.clearRecord();
+                })
+            }
+            
         },
         //选择时间的弹框打开
         showPopup() {

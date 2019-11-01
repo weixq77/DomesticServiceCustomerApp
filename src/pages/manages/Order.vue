@@ -82,7 +82,7 @@
                             <p>进度： {{item.status}}</p>
                         </div>
                         <div slot="footer">
-                            <van-button plain hairline type="danger" size="mini" @click="customerConfirmOrder(item.id)">确认</van-button>
+                            <van-button plain hairline type="danger" size="small" @click="customerConfirmOrder(item.id)">确认</van-button>
                         </div>
                     </van-card>
                 </div>
@@ -162,9 +162,8 @@ export default {
         // 确认订单并刷新订单
         customerConfirmOrder(id){
             this.confirmOrder(id)
-            .then(()=>{
-                // 确认成功后刷新订单数据
-                this.loadData();
+            .then((response)=>{
+                 this.$toast(response.statusText);
             })
             .catch((error)=>{
                 // 确认失败报错

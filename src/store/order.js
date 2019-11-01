@@ -1,4 +1,4 @@
-import { get, post, post_array } from '@/http/axios'
+import { get, post, post_arr_order } from '@/http/axios'
 import moment from 'moment'
 export default{
     namespaced: true,
@@ -40,9 +40,26 @@ export default{
             commit('refreshCustomerOrder', response.data);
         },
         // 确认订单已完成
-        async confirmOrder({dispatch},orderId){
+        async confirmOrder({dispatch,rootState},orderId){
           // 1.确认订单请求
           const response = await get('/order/confirmOrder', {orderId:orderId});
+          // 2.成功后刷新订单,传递一个用户id
+          dispatch('loadCustomerOrderData',rootState.user.info.id);
+          return response;
+        },
+        // 确认下单，保存订单
+        async submitOrder({commit,rootState}){
+          // 封装订单数据
+          let data={
+            customerId:rootState.user.info.id,
+            addressId:rootState.lastpage.currentOrderAddress.id,
+            // 将map类型的订单项转换为数组
+            orderLines:Array.from(rootState.shopcar.orderLines.values())
+          }
+          // 1.提交订单请求
+          const response = await post_arr_order('/order/save', data);
+          // 2.清空购物车
+          commit('shopcar/clearShopcar',null,{root:true});
           return response;
         }
     }

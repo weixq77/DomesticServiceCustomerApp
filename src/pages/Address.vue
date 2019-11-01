@@ -56,16 +56,17 @@ export default {
                 return this.defaultAddress;
             },
             set(val){
+                // console.log(val)
                 // 否则为切换默认地址
-                this.defaultAddress = val;
+                this.setDefaultAddressId(val);
             }
         }
     },
     methods:{
         // 查询当前用户所有地址的请求
         ...mapActions("address",["findAddress"]),
-        // 设置保存当前需要修改的地址对象
-        ...mapMutations("address",["setUpdateAddress"]),
+        // 设置保存当前需要修改的地址对象   设置默认地址id
+        ...mapMutations("address",["setUpdateAddress","setDefaultAddressId"]),
         // 在状态机中维护当前选中的这个订单的地址
         ...mapMutations("lastpage",["setCurrentOrderAddress"]),
         // 加载数据
