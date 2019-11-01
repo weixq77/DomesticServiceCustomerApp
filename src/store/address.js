@@ -5,6 +5,7 @@ export default {
     address:[],//当前用户所有地址
     updateAddress:{},//存放当前需要修改的地址
     btnDelete:false,//判断添加地址中的删除按钮是否需要出现
+    defaultAddress:0,//默认地址id
   },
   getters:{
     
@@ -13,6 +14,8 @@ export default {
     // 刷新当前用户的的所有地址
     refreahAddress(state,address){
       state.address=address;
+      // 设置默认地址id
+      state.defaultAddress = address[0].id;
     },
     // 设置存储当前需要修改的地址信息
     setUpdateAddress(state,addressObj){

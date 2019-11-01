@@ -5,11 +5,13 @@
             left-arrow
             @click-left="onClickLeft"
             />
+            <!-- 地址列表 -->
         <van-address-list
             v-model="chosenAddressId"
             :list="refreshAddressList"
             @edit="onEdit"
             @add="onAdd"
+            @select="selectAddress"
             />
     </div>
 </template>
@@ -18,9 +20,10 @@ import {mapState,mapMutations,mapActions} from 'vuex'
 export default {
     data(){
         return{
-            chosenAddressId: '1'            
+            // chosenAddressId: this.address[0].id            
             //默认选中地址
-     }
+            // index:0,//记录跳转到当前页的
+        }
     },
      created(){
         this.loadDate();
@@ -29,7 +32,9 @@ export default {
         //   用户信息
         ...mapState("user",["info"]),
         // 用户的地址信息
-        ...mapState("address",["address"]),
+        ...mapState("address",["address","defaultAddress"]),
+        // 在状态机中获取在当前选中地址后是要返回订单页还是用户页面
+        ...mapState("lastpage",["addressReturn"]),
         // 重新封装address以便渲染数据
         refreshAddressList:function(){
             let list = [];
@@ -44,6 +49,16 @@ export default {
                 list.push(obj);
             }
             return list;
+        },
+        // 默认选中的地址需要get和set维护
+        chosenAddressId:{
+            get(){
+                return this.defaultAddress;
+            },
+            set(val){
+                // 否则为切换默认地址
+                this.defaultAddress = val;
+            }
         }
     },
     methods:{
@@ -51,6 +66,8 @@ export default {
         ...mapActions("address",["findAddress"]),
         // 设置保存当前需要修改的地址对象
         ...mapMutations("address",["setUpdateAddress"]),
+        // 在状态机中维护当前选中的这个订单的地址
+        ...mapMutations("lastpage",["setCurrentOrderAddress"]),
         // 加载数据
         loadDate(){
             // 获取当前用户的所有的地址
@@ -71,7 +88,17 @@ export default {
             this.setUpdateAddress(item);
             // 2.跳转添加用户地址页面
             this.$router.push({path:"/saveAddress"});
-        }     
+        },
+        // 切换地址时触发的函数
+        selectAddress(item){
+            if(this.addressReturn===1){
+                // 当这个值等于1的时候我们也就知道它需要返回确认订单页
+                this.$router.go(-1);
+                // 并且记录当前订单选中的配送地址
+                this.setCurrentOrderAddress(item);
+            }
+            // console.log(item);//Object { name: "customer1", id: 2232, tel: "12345678989", address: "江苏省  苏州市  昆山  学院路999号" }
+        }
     }
 }
 </script>

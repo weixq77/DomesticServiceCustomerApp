@@ -8,6 +8,7 @@ import product from './product'
 import category from './category'
 import order from './order'
 import shopcar from './shopcar'
+import lastpage from './lastpage'
 
 export default new Vuex.Store({
   modules:{
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     product,
     category,
     order,
-    shopcar
+    shopcar,
+    lastpage
   }
 })

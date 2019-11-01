@@ -16,15 +16,12 @@
         <div class="categoryList">      
             <van-grid :column-num="3" >
                 <van-grid-item
-                    v-for="c in categories.slice(0,6)"
+                    v-for="(c,index) in categories.slice(0,6)"
                     :key="c.id"
                     :icon="c.icon"
                     :text="c.name"
-                    @click="openCategory(c.id)"
+                    @click="openCategory(c.id,index)"
                 />
-                <!-- <van-grid-item>
-                    <img src="./images/栏目.png" />
-                </van-grid-item> -->
             </van-grid>
        </div>
        <div class="productList">
@@ -43,7 +40,7 @@
     
 </template>
 <script>
-import {mapState,mapMatutions,mapGetters,mapActions} from 'vuex'
+import {mapState,mapMutations,mapGetters,mapActions} from 'vuex'
 export default {
     created(){
         // 查询所有的栏目
@@ -60,20 +57,23 @@ export default {
     methods:{
         // 查询所有的栏目
         ...mapActions("category",["findAllCategories"]),
-        // 查询所有的产品，根据栏目id查询产品
-        ...mapActions("product",["findAllProducts","findProductByCategory"]),
-        // 打开商品展示页
-       openCategory(id){
-        //    alert(id);
-        // 根据栏目id查询商品
-          this.findProductByCategory(id)
-        //   跳转商品展示页面
-          this.$router.push({path:'/product'})
-       },
-    //    商品详情页
-       openProduct(){
-           this.$toast('跳转商品详情页');
-       }
+        // 查询所有的产品
+        ...mapActions("product",["findAllProducts"]),
+        // 在状态机中存储当前被激活的栏目的id及栏目索引
+        ...mapMutations("lastpage",["setCategoryId","setCategoryIndex"]),
+        // 打开栏目+商品展示页
+        openCategory(categoryId,index){
+            // 在状态机中存储当前被激活的栏目的id及栏目索引
+            this.setCategoryId(categoryId);
+            this.setCategoryIndex(index);
+            //   跳转商品展示页面(传递栏目id和索引)
+            this.$router.push('/product');
+            // this.$router.push({path:'/product',query:{categoryId,index}})
+        },
+        // 商品详情页
+        openProduct(){
+            this.$toast('跳转商品详情页');
+        }
    }
 }
 </script>

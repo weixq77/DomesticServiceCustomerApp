@@ -19,7 +19,7 @@ export default {
     },
     //将有没有token作为跳转的条件，如果没有token相当于没登录先跳转到登录页面
     created(){
-        // 激活当前栏目
+        // 激活当前底部栏目
         if(this.$route.query.id){
             this.active = this.$route.query.id;
         }
