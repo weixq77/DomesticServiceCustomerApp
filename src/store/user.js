@@ -19,7 +19,6 @@ export default {
    async login(context,payload){
       let response=await post_json("/user/login",payload);
       let token=response.data.token;   
-      // await context.dispatch("info",token)
       //将token缓存到localStorage中
       setToken(token)
       //2.将token维护起来
@@ -37,8 +36,7 @@ export default {
       //2.清除本地token
       removeToken();
       //将token和info情空
-        context.commit("refreshToken","")
-       context.commit("refreshInfo",{})
+      context.commit("refreshToken","")
     }
     
   }

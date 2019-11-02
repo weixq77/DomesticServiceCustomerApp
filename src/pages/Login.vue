@@ -8,7 +8,7 @@
                     <h1><van-icon name="wap-home-o" />家政服务平台.客户端</h1>
                  </div>
             </div>
-            <div id="content"  @keyup.enter="loginHandler">
+            <div id="content" >
                 <!-- {{form}} -->
                     <van-cell-group>
                         <van-field

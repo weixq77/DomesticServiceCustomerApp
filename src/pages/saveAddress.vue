@@ -105,7 +105,8 @@ export default {
             this.saveAddress(addressObj)
             .then(()=>{
                 // 地址存储成功返回地址列表
-                this.$router.push({path:"/address"})
+                this.$router.go(-1);
+                // this.$router.push({path:"/address"})
                 // 并使用使用状态机将当前需要保存的地址清除
                 this.setUpdateAddress();
                 // 并且将删除按钮隐藏，防止下一次新添加时显示了

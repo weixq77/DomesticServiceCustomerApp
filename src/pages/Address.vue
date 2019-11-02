@@ -80,7 +80,13 @@ export default {
         },
         // 返回用户页面
         onClickLeft(){
-            this.$router.push({path:"/manages/user",query:{id:2}});
+            if(this.addressReturn===1){
+                // 当这个值等于1的时候我们也就知道它需要返回确认订单页
+                this.$router.push({path:"/submitOrder"});
+            }else{
+                // 否则跳转回用户界面
+                this.$router.push({path:"/manages/user",query:{id:2}});
+            }
         },
         // 修改用户地址
         onEdit(item){

@@ -23,14 +23,14 @@ export default {
         if(this.$route.query.id){
             this.active = this.$route.query.id;
         }
-        if(this.token){
-           //如果有token请求查出查询出token所带的顾客信息info
-           this.getInfo(this.token)
-        }else{
-          //如果没有token跳转到登录页面
-           this.$toast("token失效，请先登录")
-           this.$router.push({path:"/login"})
-        }
+        // if(this.token){
+        //    //如果有token请求查出查询出token所带的顾客信息info
+        //    this.getInfo(this.token)
+        // }else{
+        //   //如果没有token跳转到登录页面
+        //    this.$toast("token失效，请先登录")
+        //    this.$router.push({path:"/login"})
+        // }
     },
     computed:{
      ...mapState('user',['token','info'])

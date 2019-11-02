@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Manages from '../pages/manages/Layout.vue'
+import {getToken} from '../utils/auth.js'
+import store from '../store'
+import {Toast} from 'vant'
 
 Vue.use(VueRouter)
 
@@ -13,6 +16,22 @@ const routes = [
     path: '/manages',
     name: 'manages',
     component: Manages,
+    beforeEnter: (to,from,next) =>{
+      // 获取本地token
+      let token = getToken();
+      if(token){
+        // 查询info
+        store.dispatch('user/info',token)
+        .then(()=>{
+          // 当获取用户信息的时候才允许跳转
+          next();
+        })
+      }else{
+        Toast("请先登录")
+        // 跳转到登录
+        next({path:"/login"})
+      }
+    },
       children:[{
         path:"home",//首页
         component: () => import('../pages/manages/Home.vue')
@@ -34,6 +53,22 @@ const routes = [
   },
   {
     path:"/address",//地址显示页
+    beforeEnter: (to,from,next) =>{
+      // 获取本地token
+      let token = getToken();
+      if(token){
+        // 查询info
+        store.dispatch('user/info',token)
+        .then(()=>{
+          // 当获取用户信息的时候才允许跳转
+          next();
+        })
+      }else{
+        this.$toast("token失效，请先登录")
+        // 跳转到登录
+        next({path:"/login"})
+      }
+    },
     component: () => import('../pages/Address.vue')
   },
   {
