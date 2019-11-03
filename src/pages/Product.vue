@@ -90,9 +90,16 @@ export default {
         ...mapMutations("lastpage",["setCategoryId","setCategoryIndex"]),
         //确认订单，跳转确认订单页面
         onSubmit(){
-            // 传递一个当前被激活的栏目id,及栏目索引
-            // this.$router.push({path:"/SubmitOrder",query:{index:this.activeKey,categoryId:this.categoryId}})
-            this.$router.push({path:"/SubmitOrder"})
+            // 先判断当前是否选了商品
+            if(this.totalMoney==0){
+                // 当总额为0时提示先选择商品
+                this.$toast("请先选择商品！");
+            }else{
+                // 传递一个当前被激活的栏目id,及栏目索引
+                // this.$router.push({path:"/SubmitOrder",query:{index:this.activeKey,categoryId:this.categoryId}})
+                this.$router.push({path:"/SubmitOrder"})
+            }
+            
         },
         // 返回主页
         onClickLeft(){
@@ -128,6 +135,7 @@ export default {
             // 将当前商品添加至购物车中
             this.addShopcar(orderLine);
         },
+        // 当选中的商品数量减少的时候
         nubmberMinus(data){
             // 将商品信息和数量封装好
             let orderLine = {

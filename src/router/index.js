@@ -80,7 +80,7 @@ const routes = [
     component: () => import('../pages/Product.vue')
   }, 
   {
-    path:"/submitOrder",//产品展示页
+    path:"/submitOrder",//确认提交订单
     component: () => import('../pages/SubmitOrder.vue')
   },
 ]

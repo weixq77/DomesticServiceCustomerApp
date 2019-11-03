@@ -26,9 +26,11 @@
                             placeholder="请输入密码"
                             required
                         />
-                        </van-cell-group>
+                    </van-cell-group>
                 </div>
-                 <br>
+                 <p>
+                     username:customer1 password:123321
+                 </p>
                  <div id="btns">
                     <van-button type="info" size="large" @click="loginHandler">登录</van-button>
                 </div>

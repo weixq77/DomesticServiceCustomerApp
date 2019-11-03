@@ -3,7 +3,7 @@
     <div class="cardTop">
         <van-row>
             <van-col span="8">订单编号：{{data.id}}</van-col>
-            <van-col offset="13" span="3"><span style="color:red">{{data.status}}</span></van-col>
+            <van-col offset="12" span="4"><span style="color:red">{{data.status}}</span></van-col>
         </van-row>
     </div>
     <van-card

@@ -1,11 +1,13 @@
 <template>
     <div id="layout">
         <router-view></router-view>
-        <van-tabbar v-model="active" router>
-            <van-tabbar-item icon="home-o" to="/manages/home">首页</van-tabbar-item>
-            <van-tabbar-item icon="search" to="/manages/order">订单</van-tabbar-item>
-            <van-tabbar-item icon="setting-o" to="/manages/user">我的</van-tabbar-item>
-        </van-tabbar>
+        <div class="tabbar_layout">
+            <van-tabbar v-model="active" router>
+                <van-tabbar-item icon="home-o" to="/manages/home">首页</van-tabbar-item>
+                <van-tabbar-item icon="search" to="/manages/order">订单</van-tabbar-item>
+                <van-tabbar-item icon="setting-o" to="/manages/user">我的</van-tabbar-item>
+            </van-tabbar>
+        </div>
     </div>
 </template>
 <script>
@@ -42,3 +44,11 @@ export default {
     }
 }
 </script>
+<style scoped>
+.tabbar_layout::before{
+    content: "";
+    clear: both;
+    display: block;
+    height: 50px;
+}
+</style>

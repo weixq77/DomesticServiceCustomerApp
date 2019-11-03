@@ -32,11 +32,13 @@ export default {
     //退出登录，清除token
     async logout(context){
       //1.向后台请求退出
-      await post("/user/logout");
+      let response = await post("/user/logout");
       //2.清除本地token
-      removeToken();
-      //将token和info情空
+      await removeToken();
+      //将token和info清空
       context.commit("refreshToken","")
+      context.commit("refreshInfo",{})
+      return response;
     }
     
   }

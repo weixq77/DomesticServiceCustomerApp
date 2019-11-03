@@ -100,7 +100,8 @@ export default {
         selectAddress(item){
             if(this.addressReturn===1){
                 // 当这个值等于1的时候我们也就知道它需要返回确认订单页
-                this.$router.go(-1);
+                // this.$router.go(-1);submitOrder
+                this.$router.push({path:"/submitOrder"});
                 // 并且记录当前订单选中的配送地址
                 this.setCurrentOrderAddress(item);
             }

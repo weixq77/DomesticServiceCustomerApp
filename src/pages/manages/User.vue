@@ -21,7 +21,7 @@
                        
         </div>
         <van-cell is-link @click="addressHandler"><van-icon name="location-o" />&nbsp;常用地址</van-cell>
-        <van-cell is-link @click="onClickRight"><van-icon name="close" />&nbsp;退出</van-cell>
+        <van-cell @click="onClickRight"><van-icon name="close" />&nbsp;退出</van-cell>
     </div>
 </template>
 <script>
@@ -50,12 +50,13 @@ export default {
             'getInfo':'info',
             'logout':'logout'
         }),
+        // 退出当前账号
         onClickRight(){
             //点击退出调用事件
             this.logout()
-            //如果成功则返回登录页面
+            //如果成功则返回首页页面
             .then(()=>{
-                 this.$router.push({path:"/"})
+                 this.$router.push({path:"/login"})
             })
             
         },

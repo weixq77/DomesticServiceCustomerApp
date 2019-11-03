@@ -76,7 +76,7 @@ export default {
                      this.$router.push({path:"/address"})
                 })
                 .catch((error)=>{
-                    this.$toast.fail(error)
+                    this.$toast.fail("该地址暂时不可删除！")
                 })
             }else{
                 this.$toast.fail("删除失败")
